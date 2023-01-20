@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <title>Java validation</title>
+    <link rel="stylesheet" href="form_validation.css">
+</head>
+
+<body>
+    <form action="" id="form">
+    <center>
+    <div class="main">
+        <h1>Form validation</h1>
+
+        <div name="Name">
+            <label class="lab">Name :</label><br>
+            <input type="text" id="name" placeholder="Enter your name" onkeyup="validateName()" calss="txt"><br>
+            <samp id="name-error"></samp><br>
+        </div>
+
+        <div>
+            <label class="lab">E-mail :</label><br>
+            <input type="text" id="email" placeholder="Enter your mail id" onkeyup="validateEmail() " calss="txt"><br>
+            <samp id="email-error"></samp><br>
+        </div>
+
+        <div>
+            <label class="lab">Address :</label><br>
+            <input type="text" id="address" placeholder="Enter your Address" onkeyup=" validateAddress()" calss="txt"><br>
+            <samp id="address-error"></samp><br>
+        </div>
+
+        <div>
+            <label class="lab">phone Number :</label><br>
+            <input type="text" id="Number" placeholder="Enter your phone number" onkeyup=" validateNumber()" calss="txt"><br>
+            <samp id="number-error"></samp><br>
+        </div>
+
+        <input type="submit"  onclick="validateForm() " >
+        <samp id="submit-error"></samp><br>
+
+    </div>
+    </center>
+</form>
+
+    <script>
+        const nameError=document.getElementById("name-error");
+        const emailError=document.getElementById("email-error");
+        const addressError=document.getElementById("address-error");
+        const numberError=document.getElementById("number-error");
+        const submitError=document.getElementById("submit-error");
+
+
+        function validateName() {
+            const name = document.getElementById('name').value;
+            if (name.length == 0) {
+                nameError.innerText = "*name Cannot be empty";
+                nameError.style.color = "red";
+                return false;
+            }
+            if (!name.match(/^[a-zA-Z\s\.]+$/)) {
+                nameError.innerText = "*name should be alphabets only";
+                nameError.style.color = "red";
+                return false;
+            }
+            else {
+                nameError.innerText = "valid";
+                nameError.style.color = "green";
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email').value;
+            if (email.length == 0) {
+                emailError.innerText = "*email Cannot be empty";
+                emailError.style.color = "red";
+                return false;
+            }
+            if (!email.match(/^[a-zA-Z0-9\.\_]+[@][a-z]+[\.][a-z]{2,3}$/)) {
+                emailError.innerText = "*Enter valid email address";
+                emailError.style.color = "";
+                return false;
+            }
+            else {
+                emailError.innerText = "valid";
+                emailError.style.color = "green"
+                return true;
+            }
+        }
+
+        function validateAddress(){
+            const address = document.getElementById("address").value;
+            if (address.length == 0){
+                addressError.innerText = "Address cannot be empty";
+                addressError.style.color = "red";
+                return false;
+            }
+            else{
+                addressError.innerText = "valid";
+                addressError.style.color = "green"
+                return true;
+
+            }
+        }
+
+        function validateNumber(){
+            const number = document.getElementById("Number").value;
+            if (number.length == 0){
+                numberError.innerText = "phone number cannot be empty";
+                numberError.style.color = "red";
+                return false;
+            }
+
+            if (!number.match(/^\d{10}$/)){
+                numberError.innerText="enter the valid phone number";
+                numberError.style.color = "red";
+                return false;
+            }
+
+            else{
+                numberError.innerText = "Valid";
+                numberError.style.color = "green";
+
+            }
+        }
+
+        const validateForm = (event) => {
+            let form = document.getElementById('form');
+            if (!validateName() & !validateEmail() & !validateAddress() & !validateNumber()) {
+                event.preventDefault();
+                submitError.innerText = "*One of the field is either not filled or not valid";
+                submitError.style.color = "red";
+                return false;
+            }
+            else {
+                window.alert("Information submitted successful")
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>
